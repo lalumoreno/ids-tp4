@@ -1,0 +1,32 @@
+BasedOnStyle: LLVM
+Language: Cpp
+
+# General
+IndentWidth: 4              # número de espacios por nivel de indentación
+TabWidth: 4                 # tamaño de tabulador
+UseTab: Never               # usar espacios en lugar de tabs
+ColumnLimit: 80             # ancho máximo de línea
+BreakBeforeBraces: Allman   # estilo de llaves (Allman: llaves en nueva línea)
+
+# Espaciado
+SpaceAfterCStyleCast: true
+SpacesInParentheses: false
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+
+# Punteros y referencias
+PointerAlignment: Left      # int* ptr en lugar de int *ptr
+
+# Includes
+SortIncludes: true
+IncludeBlocks: Preserve     # no reorganiza bloques de includes separados por líneas en blanco
+
+# Funciones
+AlignAfterOpenBracket: Align
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# Comentarios
+ReflowComments: true        # ajustar comentarios largos al ancho de columna
+
