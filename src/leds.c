@@ -5,10 +5,16 @@ static uint16_t* puerto;
 void LedsInitDriver(uint16_t* puerto_virtual)
 {
     puerto = puerto_virtual;
-    *puerto = 0x0000; // Todos los bits en 0 (leds apagados)
+    *puerto = ALL_LEDS_OFF; // Todos los bits en 0 (leds apagados)
 }
 
 void LedsTurnOn(int led_number)
 {
-    *puerto = 1 << 2;
+    *puerto = (1 << (led_number - 1)); // Prender solo el led especificado
+}
+
+void LedsTurnOff(int led_number)
+{
+    *puerto =
+        (*puerto & ~(1 << (led_number - 1))); // Apagar solo el led especificado
 }
