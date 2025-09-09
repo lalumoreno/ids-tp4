@@ -41,12 +41,24 @@ void test_prender_y_apagar_un_led(void)
         ALL_LEDS_OFF, puerto_virtual); // Todos los LEDs deben estar apagados
 }
 
+// Prender varios leds y verificar que todos queden encendidos
+void test_prender_varios_leds(void)
+{
+    LedsTurnOn(2);
+    LedsTurnOn(4);
+    LedsTurnOn(6);
+    TEST_ASSERT_EQUAL_HEX16(
+        1 << 1 | 1 << 3 | 1 << 5,
+        puerto_virtual); // el led 2, 4 y 6 deben estar encendidos
+}
+
 // Prender mas de un led, apagar uno y verificar que los demás no cambiaron
 void test_prender_varios_y_apagar_uno(void)
 {
-    LedsTurnOn(3);
     LedsTurnOn(5);
+    LedsTurnOn(3);
     LedsTurnOff(3);
+
     TEST_ASSERT_EQUAL_HEX16(
         1 << 4, puerto_virtual); // Solo el LED 5 debe estar encendido
 }
@@ -65,4 +77,37 @@ void test_prender_led_fuera_de_rango(void)
     LedsTurnOn(17); // LED fuera de rango (mayor que 16)
     TEST_ASSERT_EQUAL_HEX16(
         ALL_LEDS_OFF, puerto_virtual); // Todos los LEDs deben estar apagados
+}
+
+// Apagar leds fuera de rango y verificar que se recibe un error
+void test_apagar_led_fuera_de_rango(void)
+{
+    LedsTurnOn(5); // Prender un LED válido primero
+
+    myLog_Expect(ERROR, "LedsTurnOff", 0,
+                 "LED number out of range. Valid range is 1-16.");
+    myLog_IgnoreArg_line();
+    LedsTurnOff(0); // LED fuera de rango (menor que 1)
+    TEST_ASSERT_EQUAL_HEX16(1 << 4,
+                            puerto_virtual); // El LED 5 debe seguir encendido
+
+    myLog_ExpectAnyArgs();
+    LedsTurnOff(17); // LED fuera de rango (mayor que 16)
+    TEST_ASSERT_EQUAL_HEX16(1 << 4,
+                            puerto_virtual); // El LED 5 debe seguir encendido
+}
+
+// Prender todos los leds
+void test_prender_todos_los_leds(void)
+{
+    LedsTurnAllOn();
+    TEST_ASSERT_EQUAL_HEX16(ALL_LEDS_ON, puerto_virtual);
+}
+
+// Apagar todos los leds
+void test_apagar_todos_los_leds(void)
+{
+    LedsTurnAllOn(); // Primero prender todos los LEDs
+    LedsTurnAllOff();
+    TEST_ASSERT_EQUAL_HEX16(ALL_LEDS_OFF, puerto_virtual);
 }
