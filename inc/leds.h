@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdint.h>
 
 #define ALL_LEDS_ON 0xFFFF
@@ -10,3 +11,4 @@ void LedsTurnOn(int led_number);
 void LedsTurnOff(int led_number);
 void LedsTurnAllOff(void);
 void LedsTurnAllOn(void);
+bool LedsIsOn(int led_number);

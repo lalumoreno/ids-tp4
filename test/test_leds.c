@@ -111,3 +111,18 @@ void test_apagar_todos_los_leds(void)
     LedsTurnAllOff();
     TEST_ASSERT_EQUAL_HEX16(ALL_LEDS_OFF, puerto_virtual);
 }
+
+// Consultar el estado de un led encendido y verificar que es correcto
+void test_consultar_estado_led_encendido(void)
+{
+    LedsTurnOn(7);
+    TEST_ASSERT_TRUE(LedsIsOn(7));
+}
+
+// Consultar el estado de un led apagado y verificar que es correcto
+void test_consultar_estado_led_apagado(void)
+{
+    LedsTurnOn(8);
+    LedsTurnOff(8);
+    TEST_ASSERT_FALSE(LedsIsOn(8));
+}

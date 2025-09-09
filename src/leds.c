@@ -1,12 +1,11 @@
 #include "leds.h"
 #include "myLog.h"
-#include <stdbool.h>
 
 static uint16_t* puerto;
 
 bool isValidLedNumber(int led_number)
 {
-    return (led_number >= MIN_LED_NUMBER && led_number <= MAX_LED_NUMBER);
+    return (led_number >= MIN_LED_NUMBER) && (led_number <= MAX_LED_NUMBER);
 }
 
 void LedsInitDriver(uint16_t* puerto_virtual)
@@ -49,4 +48,14 @@ void LedsTurnAllOff(void)
 void LedsTurnAllOn(void)
 {
     *puerto = ALL_LEDS_ON;
+}
+
+bool LedsIsOn(int led_number)
+{
+    if (!isValidLedNumber(led_number))
+    {
+        return false;
+    }
+
+    return ((*puerto & (1 << (led_number - 1))) != 0);
 }
