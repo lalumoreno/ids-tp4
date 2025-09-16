@@ -126,3 +126,10 @@ void test_consultar_estado_led_apagado(void)
     LedsTurnOff(8);
     TEST_ASSERT_FALSE(LedsIsOn(8));
 }
+
+// Consultar un led fuera de rango y verificar que devuelve false
+void test_consultar_led_fuera_de_rango(void)
+{
+    TEST_ASSERT_FALSE(LedsIsOn(0));  // LED fuera de rango (menor que 1)
+    TEST_ASSERT_FALSE(LedsIsOn(17)); // LED fuera de rango (mayor que 16)
+}
