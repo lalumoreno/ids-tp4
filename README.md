@@ -1,4 +1,4 @@
-# Proyecto TP4 - IDS
+# Trabajo práctico 2 - Integración continua
 
 Estudiante: Laura Andrea Moreno Rodriguez 
 
@@ -12,7 +12,6 @@ cd ids-tp4
 ```
 
 ## 🔧 Configuración inicial
-
 Instalar los hooks de **pre-commit**:
 
 ```bash
