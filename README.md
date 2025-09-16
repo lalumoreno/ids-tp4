@@ -1,4 +1,4 @@
-# Proyecto TP4 - IDS
+# Trabajo práctico 2 - Integración continua
 
 Estudiante: Laura Andrea Moreno Rodriguez 
 
